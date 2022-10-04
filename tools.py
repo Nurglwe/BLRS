@@ -17,14 +17,20 @@ def getdiscordutils(objects,key):
   return discord.utils.get(objects, id=int(os.getenv("{}".format(key))))
 
 class embedhandler:
-  def __init__(self,title,colour,channel,inl,client):
+  def __init__(self,title,colour,channel,inl,image,client):
     self.title=title
     self.colour=colour
     self.sendto=channel
     self.client=client
     self.inl=inl
+    if image != None:
+      self.image=image
   async def sendembed(self,args):
     embed=discord.Embed(title=self.title,colour=self.colour)
+    try:
+      embed.set_image(url=self.image)
+    except:
+      print("a")
     keys=list(args.keys())
     vals=list(args.values())
     for i in range(len(vals)):
